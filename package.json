@@ -9,8 +9,8 @@
   "scripts": {
     "build": "webpack --progress",
     "lint": "eslint --ignore-path .gitignore .",
-    "prebuild": "rimraf build/* --allow-root install",
-    "prestart": "npm run build --allow-root install",
+    "prebuild": "rimraf build/*",
+    "prestart": "npm run build",
     "start": "node server",
     "start-dev": "nodemon server -w server"
   },
