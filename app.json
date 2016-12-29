@@ -1,0 +1,7 @@
+{
+  "name": "react-site",
+  "description": "An app using react as the template engine",
+  "repository": "https://github.com/HappyBite/react-site.git",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["react"]
+}
