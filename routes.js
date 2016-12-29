@@ -2,11 +2,11 @@ import React from 'react';
 import Match from 'react-router/Match';
 import Miss from 'react-router/Miss';
 
-import LayoutDefault from './client/layouts/LayoutDefault';
-import Home from './client/templates/pages/StartPage';
-import SubPage from './client/templates/pages/SubPage';
-import Blog from './client/templates/Blog';
-import NoMatch from './client/templates/pages/NoMatch';
+import LayoutDefault from './app/layouts/LayoutDefault';
+import Home from './app/templates/pages/StartPage';
+import SubPage from './app/templates/pages/SubPage';
+import Blog from './app/templates/blog';
+import NoMatch from './app/templates/pages/NoMatch';
 
 const App = () => (
   <div>
