@@ -3,7 +3,7 @@ import styleSheet from 'styled-components/lib/models/StyleSheet';
 import { ServerRouter, createServerRenderContext } from 'react-router';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 
-import App from '../../client/components/App';
+import App from '../../routes';
 import Html from '../views/Html';
 
 export default function reactMiddleware(req, res) {
@@ -13,7 +13,7 @@ export default function reactMiddleware(req, res) {
   const markup = renderToString(
     <ServerRouter location={req.url} context={context}>
       <App />
-    </ServerRouter>,
+    </ServerRouter>
   );
 
   const { missed, redirect } = context.getResult();
@@ -25,7 +25,7 @@ export default function reactMiddleware(req, res) {
   const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');
 
   const html = renderToStaticMarkup(
-    <Html assets={assets} markup={markup} styles={styles} />,
+    <Html assets={assets} markup={markup} styles={styles} />
   );
 
   return res
