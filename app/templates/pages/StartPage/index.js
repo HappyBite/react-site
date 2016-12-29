@@ -1,10 +1,8 @@
 import React from 'react';
 
-import H1 from '../../../components/H1';
-
 const StartPage = () => (
   <div>
-    <H1>Startpage</H1>
+    <h1>Startpage</h1>
   </div>
 );
 

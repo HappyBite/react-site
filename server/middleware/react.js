@@ -1,9 +1,9 @@
 import React from 'react';
-import styleSheet from 'styled-components/lib/models/StyleSheet';
 import { ServerRouter, createServerRenderContext } from 'react-router';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
+import Helmet from "react-helmet";
 
-import App from '../../routes';
+import Routes from '../../routes';
 import Html from '../views/Html';
 
 export default function reactMiddleware(req, res) {
@@ -12,7 +12,7 @@ export default function reactMiddleware(req, res) {
 
   const markup = renderToString(
     <ServerRouter location={req.url} context={context}>
-      <App />
+      <Routes />
     </ServerRouter>
   );
 
@@ -22,12 +22,12 @@ export default function reactMiddleware(req, res) {
     return res.redirect(301, redirect.pathname);
   }
 
-  const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');
-
+  let head = Helmet.rewind();
   const html = renderToStaticMarkup(
-    <Html assets={assets} markup={markup} styles={styles} />
+    <Html head={head} assets={assets} markup={markup} />
   );
-
+  
+  
   return res
     .status(missed ? 404 : 200)
     .send(`<!doctype html>${html}`);
