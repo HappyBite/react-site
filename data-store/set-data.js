@@ -53,6 +53,7 @@ module.exports = {
       var bucket_meta_dictionary = {};
       var routes = {};
       var pageRoutes = {};
+      var pages = {};
       var startPage;
       var startPageId;
       if(typeof items === 'undefined') {
@@ -97,6 +98,7 @@ module.exports = {
       if (startPage) {
         routes['/'] = {type: 'page', item_type: startPage.meta.item_type.data.id, path: '/'};
         pageRoutes['/'] = startPage;
+        pages['/'] = startPage;
       }
       for (var i = 0; i < items.length; i++) {
         var item = items[i];
@@ -109,6 +111,9 @@ module.exports = {
           page.meta.position = item.meta.position;
           routes['/' + page.attributes.slug] = {type: 'page', item_type: page.meta.item_type.data.id, path: page.attributes.path}; 
           pageRoutes['/' + page.attributes.slug] = {type: 'page', item_type: page.meta.item_type.data.id, path: page.attributes.path}; 
+          if (page.id !== startPage.id) {
+            pages['/' + page.attributes.slug] = page;
+          }
         } 
       }
       
@@ -124,6 +129,7 @@ module.exports = {
       cache.set('bucket_meta_dictionary', bucket_meta_dictionary);
       cache.set('routes', routes);
       cache.set('page_routes', pageRoutes);
+      cache.set('pages', pages);
       cache.set('version', Date.now());
       cb(null, cache);
     });

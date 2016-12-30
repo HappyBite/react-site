@@ -19,8 +19,7 @@ export default {
       'react-router/BrowserRouter',
       'react-router/Link',
       'react-router/Match',
-      'react-router/Miss',
-      'styled-components',
+      'react-router/Miss'
     ],
   },
   output: {
@@ -33,6 +32,7 @@ export default {
       {
         test: /\.js$/,
         exclude: /node_modules/,
+        // exclude: [/node_modules/, /data-store/],        
         use: [
           {
             loader: 'babel-loader',

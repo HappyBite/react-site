@@ -3,13 +3,14 @@ import { ServerRouter, createServerRenderContext } from 'react-router';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import Helmet from "react-helmet";
 
+var helper = require('../../data-store/helper.js');
+
 import Routes from '../../routes';
 import Html from '../views/Html';
 
 export default function reactMiddleware(req, res) {
-  var data = require('../../data-store/get-data.js');
-  data = data.get('items');
-
+  var data = helper.getData(req.url);
+  
   const assets = require('../../build/static/assets.json'); // eslint-disable-line global-require, import/no-unresolved
   const context = createServerRenderContext();
   
@@ -26,11 +27,6 @@ export default function reactMiddleware(req, res) {
   }
 
   let head = Helmet.rewind();
-  // <Helmet
-  //   script={[
-  //     {innerHTML: `window.data = '${JSON.stringify(data)}'`}
-  //   ]}
-  // />
   const html = renderToStaticMarkup(
     <Html head={head} assets={assets} markup={markup} data={data} />
   );

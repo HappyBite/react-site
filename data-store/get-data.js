@@ -1,4 +1,6 @@
 var cache;
+import nCache from 'nconf';
+
 if (typeof window !== 'undefined') {
   cache = {
     get: function(key) {
@@ -11,7 +13,7 @@ if (typeof window !== 'undefined') {
     }
   }
 } else {
-  cache = require('nconf');
+  cache = nCache;
   // Init cache
   cache.argv().env();
   cache.add('system', {type: 'file', file: 'dummy: has to be here to get set to work'});

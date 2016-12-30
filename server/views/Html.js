@@ -1,10 +1,6 @@
 /* eslint-disable react/no-danger, react/prop-types */
 import React from 'react';
 
-// <script>
-//   window.data = '${JSON.stringify(data)}';
-// </script>
-
 export default ({ head, assets, markup, data }) => (
   <html lang="en">
     <head>
@@ -15,7 +11,7 @@ export default ({ head, assets, markup, data }) => (
     <body>
       <div dangerouslySetInnerHTML={{ __html: markup }} id="root" />
       {head.script.toComponent()}
-      <div dangerouslySetInnerHTML={{ __html: `"<div><script>window.data = '${JSON.stringify(data)}';</script></div>"` }} />
+      <div dangerouslySetInnerHTML={{ __html: `<div><script>window.data = '${JSON.stringify(data)}';</script></div>` }} />
       <script src={assets.vendor.js} />
       <script src={assets.main.js} />
     </body>
