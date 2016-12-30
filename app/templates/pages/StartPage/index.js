@@ -3,8 +3,8 @@ import React from 'react';
 class StartPage extends React.Component {
   constructor(props) {
     super(props);
-    console.log('PROPS: ', this.props);
-    console.log('DATA: ', this.data);
+    // console.log('PROPS: ', this.props);
+    console.log('DATA: ', this);
   }
   
   render() {

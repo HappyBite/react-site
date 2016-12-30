@@ -2,14 +2,18 @@ import React from 'react';
 import { ServerRouter, createServerRenderContext } from 'react-router';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import Helmet from "react-helmet";
-var cache = require('../../data-store/data');
-var data = cache.get('items');
-console.log('DDDDDDDDD: ', data);
 
 import Routes from '../../routes';
 import Html from '../views/Html';
 
 export default function reactMiddleware(req, res) {
+  var cache = require('../../data-store/data.js');
+  // console.log('react.js');
+  // if (cache.get('items')) {
+  //   console.log('DATA in react.js: ', cache.get('items')[0].id);
+  // }
+  var data = cache.get('items');
+
   const assets = require('../../build/static/assets.json'); // eslint-disable-line global-require, import/no-unresolved
   const context = createServerRenderContext();
   
@@ -26,8 +30,13 @@ export default function reactMiddleware(req, res) {
   }
 
   let head = Helmet.rewind();
+  // <Helmet
+  //   script={[
+  //     {innerHTML: `window.data = '${JSON.stringify(data)}'`}
+  //   ]}
+  // />
   const html = renderToStaticMarkup(
-    <Html head={head} assets={assets} markup={markup} contexti={data} />
+    <Html head={head} assets={assets} markup={markup} data={data} />
   );
   
   

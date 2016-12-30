@@ -7,11 +7,11 @@ import morgan from 'morgan';
 import reactMiddleware from './middleware/react';
 import { webpackDevMiddleware, webpackHotMiddleware } from './middleware/webpack';
 
+import cacheData from '../cache-data.js';
+
 const isProduction = process.env.NODE_ENV === 'production';
 const port = process.env.PORT || 3000;
 const app = express();
-
-import cacheData from '../cache-data.js';
 
 if (isProduction) {
   app.use(compression());

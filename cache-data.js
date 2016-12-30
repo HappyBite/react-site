@@ -6,7 +6,6 @@ var lock = new AsyncLock();
 module.exports = function(app) {    
   app.use(function(req, res, next) {
     lock.enter(function(token) {
-      console.log('uuuuuuuu: ', cache.get('items'));
       if (!cache.get('items')) {
         setCache.setCache(function(err, data) {
           if (err) {
@@ -15,13 +14,18 @@ module.exports = function(app) {
             lock.leave(token);
             return false;
           } else {
-            console.log('SEEEEETTTING')
             lock.leave(token);
+            // if (cache.get('items')) {
+            //   console.log('DATAAAAA: ', cache.get('items')[0].id);
+            // }
             next();
           }
         });
       } else {
         lock.leave(token);
+        // if (cache.get('items')) {
+        //   console.log('DATAAAAA: ', cache.get('items')[0].id);
+        // }
         next();
       }
     });
