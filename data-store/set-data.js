@@ -1,6 +1,6 @@
-var client = require('../cms-client');
+var client = require('./cms-client');
 var async = require('async');
-var cache = require('./data');
+var cache = require('./get-data');
 
 module.exports = {
   setCache: function(cb) {

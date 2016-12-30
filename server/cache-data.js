@@ -1,5 +1,5 @@
-var cache = require('./data-store/data');
-var setCache = require('./data-store/set-cache');
+var cache = require('../data-store/get-data');
+var setCache = require('../data-store/set-data');
 var AsyncLock = require('node-async-locks').AsyncLock;
 var lock = new AsyncLock();
 
@@ -15,17 +15,11 @@ module.exports = function(app) {
             return false;
           } else {
             lock.leave(token);
-            // if (cache.get('items')) {
-            //   console.log('DATAAAAA: ', cache.get('items')[0].id);
-            // }
             next();
           }
         });
       } else {
         lock.leave(token);
-        // if (cache.get('items')) {
-        //   console.log('DATAAAAA: ', cache.get('items')[0].id);
-        // }
         next();
       }
     });

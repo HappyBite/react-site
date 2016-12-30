@@ -7,12 +7,8 @@ import Routes from '../../routes';
 import Html from '../views/Html';
 
 export default function reactMiddleware(req, res) {
-  var cache = require('../../data-store/data.js');
-  // console.log('react.js');
-  // if (cache.get('items')) {
-  //   console.log('DATA in react.js: ', cache.get('items')[0].id);
-  // }
-  var data = cache.get('items');
+  var data = require('../../data-store/get-data.js');
+  data = data.get('items');
 
   const assets = require('../../build/static/assets.json'); // eslint-disable-line global-require, import/no-unresolved
   const context = createServerRenderContext();
