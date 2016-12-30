@@ -13,7 +13,8 @@ const LayoutDefault = () => (
       title="Dynamic title here"
       link={[
         {rel: "shortcut icon", href: "/assets/favicon.svg"},
-        {rel: "stylesheet", href: "/assets/css/bootstrap.min.css"}
+        {rel: "stylesheet", href: "/assets/css/bootstrap.min.css"},
+        {rel: "stylesheet", href: "/assets/css/style.css"}
       ]}
       script={[
         {src: "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"},

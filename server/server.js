@@ -11,6 +11,8 @@ const isProduction = process.env.NODE_ENV === 'production';
 const port = process.env.PORT || 3000;
 const app = express();
 
+import cacheData from '../cache-data.js';
+
 if (isProduction) {
   app.use(compression());
 } else {
@@ -21,6 +23,9 @@ if (isProduction) {
 app.use(morgan(isProduction ? 'combined' : 'dev'));
 app.use(express.static(path.resolve(__dirname, '../build')));
 app.use('/assets', express.static(path.resolve(path.join( __dirname, '../app/assets' ))));
+
+cacheData(app);
+
 app.use(reactMiddleware);
 
 app.listen(port, () => {

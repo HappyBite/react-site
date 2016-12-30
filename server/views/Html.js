@@ -1,7 +1,7 @@
 /* eslint-disable react/no-danger, react/prop-types */
 import React from 'react';
 
-export default ({ head, assets, markup }) => (
+export default ({ head, assets, markup, contexti }) => (
   <html lang="en">
     <head>
       {head.meta.toComponent()}
@@ -13,6 +13,9 @@ export default ({ head, assets, markup }) => (
       <script src={assets.vendor.js} />
       <script src={assets.main.js} />
       {head.script.toComponent()}
+      <script>
+        window.data = "{contexti}";
+      </script>
     </body>
   </html>
 );

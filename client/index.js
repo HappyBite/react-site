@@ -4,9 +4,11 @@ import { render } from 'react-dom';
 
 import Routes from '../routes';
 
+var data = JSON.parse(data);
+
 render(
   <Router>
-    <Routes />
+    <Routes data />
   </Router>,
   document.getElementById('root')
 );

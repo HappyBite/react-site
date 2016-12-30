@@ -8,15 +8,23 @@ import SubPage from './app/templates/pages/SubPage';
 import Blog from './app/templates/blog';
 import NoMatch from './app/templates/pages/NoMatch';
 
-const App = () => (
+// console.log(typeof window !== 'undefined');
+// import cachi from './data-store/data';
+// const data = {
+//   gaga: 'hehe'
+// };
+
+const App = ({data}) => (
   <div>
     <LayoutDefault />
-    <Match exactly pattern="/" component={Home} />
-    <Match pattern="/sida-1" component={SubPage} />
-    <Match pattern="/sida-1/undersida-1" component={SubPage} />
-    <Match pattern="/blog" component={Blog} />
-    <Match pattern="/contact" component={SubPage} />
-    <Miss component={NoMatch} />
+    <div className="container">
+      <Match exactly pattern="/" render={(props) => <Home data={data} props={props} />} />
+      <Match pattern="/sida-1" render={(props) => <SubPage data={data} props={props} />} />
+      <Match pattern="/sida-1/undersida-1" render={(props) => <SubPage data={data} props={props} />} />
+      <Match pattern="/blog" render={(props) => <Blog data={data} props={props} />} />
+      <Match pattern="/contact" render={(props) => <SubPage data={data} props={props} />} />
+      <Miss component={NoMatch} />
+    </div>
   </div>
 );
 

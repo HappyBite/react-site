@@ -2,6 +2,9 @@ import React from 'react';
 import { ServerRouter, createServerRenderContext } from 'react-router';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import Helmet from "react-helmet";
+var cache = require('../../data-store/data');
+var data = cache.get('items');
+console.log('DDDDDDDDD: ', data);
 
 import Routes from '../../routes';
 import Html from '../views/Html';
@@ -9,10 +12,10 @@ import Html from '../views/Html';
 export default function reactMiddleware(req, res) {
   const assets = require('../../build/static/assets.json'); // eslint-disable-line global-require, import/no-unresolved
   const context = createServerRenderContext();
-
+  
   const markup = renderToString(
     <ServerRouter location={req.url} context={context}>
-      <Routes />
+      <Routes data={data} />
     </ServerRouter>
   );
 
@@ -24,7 +27,7 @@ export default function reactMiddleware(req, res) {
 
   let head = Helmet.rewind();
   const html = renderToStaticMarkup(
-    <Html head={head} assets={assets} markup={markup} />
+    <Html head={head} assets={assets} markup={markup} contexti={data} />
   );
   
   
