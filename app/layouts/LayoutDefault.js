@@ -11,7 +11,7 @@ const LayoutDefault = ({data}) => {
           {charSet: "utf-8"},
           {name: "viewport", content: "width=device-width, initial-scale=1"}
         ]}
-        title="Dynamic title here"
+        title={data.current_page.attributes.display_name}
         link={[
           {rel: "shortcut icon", href: "/assets/favicon.svg"},
           {rel: "stylesheet", href: "/assets/css/bootstrap.min.css"},

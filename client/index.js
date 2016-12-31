@@ -8,15 +8,15 @@ var helper = require('../data-store/helper.js');
 
 getData(function(err, data) {
   var d = helper.getPathData(location.pathname);
-  startApp(d);
+  startApp(d, location.pathname);
 });
 
 import Routes from '../routes';
 
-function startApp(data) {
+function startApp(data, url) {
   render(
     <Router>
-      <Routes data={data} />
+      <Routes url={url} />
     </Router>,
     document.getElementById('root')
   );

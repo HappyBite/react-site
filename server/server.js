@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import reactMiddleware from './middleware/react';
 import { webpackDevMiddleware, webpackHotMiddleware } from './middleware/webpack';
 
+import customRoutes from './custom-routes/index.js';
 import cacheData from './cache-data.js';
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -24,8 +25,8 @@ app.use(morgan(isProduction ? 'combined' : 'dev'));
 app.use(express.static(path.resolve(__dirname, '../build')));
 app.use('/assets', express.static(path.resolve(path.join( __dirname, '../app/assets' ))));
 
-cacheData(app);
-
+app.use(customRoutes);
+app.use(cacheData);
 app.use(reactMiddleware);
 
 app.listen(port, () => {

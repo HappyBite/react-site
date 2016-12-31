@@ -9,33 +9,33 @@ import Blog from './app/templates/blog';
 import Portfolio from './app/templates/portfolio';
 import NoMatch from './app/templates/pages/NoMatch.js';
 
-import getData from './client/get-data';
+// import getData from './client/get-data';
 var helper = require('./data-store/helper.js');
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.getRoutes = this.getRoutes.bind(this);
-    this.state = {
-      data: this.props.data
-    };
+    // this.state = {
+    //  data: this.props.data
+    // };
   }
   
   componentWillReceiveProps() {
-    getData(function(err, res) {
-      var data = helper.getPathData(location.pathname);
-      this.setState({data});
-    }.bind(this));
+    // getData(function(err, res) {
+    //   var data = helper.getPathData(location.pathname);
+    //   this.setState({data});
+    // }.bind(this));
     
     // var data = helper.getPathData(location.pathname);
     // this.setState({data});
   }
   
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.data.url !== nextProps.data.url) {
-      return true;
-    }
-    return false;
+    // if (nextState.data.url !== nextProps.data.url) {
+    //   return true;
+    // }
+    return true;
   }
   
   getRoutes(data) {
@@ -55,15 +55,22 @@ class App extends React.Component {
   }
   
   render() {
-    console.log('DATA: ', this.state.data);
+    let url = typeof location !== 'undefined' ?
+              location.pathname :
+              this.props.url;
+    let data = helper.getPathData(url);
+    if (!data.current_page) {
+      console.log('NO DATA AGAIN');
+      return false;
+    }
     return (
       <div>
-        <LayoutDefault data={this.state.data} />
+        <LayoutDefault data={data} />
         <div className="container">
-          {this.getRoutes(this.state.data)}
-          <Miss render={(props) => <NoMatch {...props} data={this.state.data} />} />
+          {this.getRoutes(data)}
+          <Miss render={(props) => <NoMatch {...props} data={data} />} />
         </div>
-    </div>
+      </div>
     );
   }
 }
