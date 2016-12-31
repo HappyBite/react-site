@@ -1,7 +1,8 @@
 import React from 'react';
 
-const StartPage = ({ data, props }) => {
-  // console.log('DATA: ', data);
+const StartPage = (props) => {
+  // console.log('DATA: ', props.data);
+  // console.log('PROPS: ', props.pathname);
   return (
     <div className="starter-template">
       <h1>Bootstrap starter template</h1>

@@ -3,7 +3,7 @@ var async = require('async');
 var cache = require('../data-store/get-data');
 
 var setData = function(cb) {
-  console.log('This will only show once!'); 
+  // console.log('This will only show once!'); 
   async.parallel({
     data: function(callback) {
       request
@@ -38,7 +38,7 @@ var setData = function(cb) {
     cache.set('routes', data.routes);
     cache.set('page_routes', data.pageRoutes);
     cache.set('pages', data.pages);
-    cache.set('version', Date.now());
+    cache.set('version', data.version);
     cb(null, cache);
   });
 };
