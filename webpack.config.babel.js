@@ -6,6 +6,12 @@ import webpack from 'webpack';
 const isProduction = process.env.NODE_ENV === 'production';
 
 export default {
+  target: 'web',
+  node: {
+    fs: 'empty',
+    child_process: 'empty'
+    // './node_modules/sdk/node_modules/nconf/node_modules/yargs/node_modules/os-locale/index.js': false
+  },
   entry: {
     main: isProduction ? [
       './client',
@@ -25,14 +31,22 @@ export default {
   output: {
     filename: `static/js/[name]${isProduction ? '.[chunkhash:8]' : ''}.js`,
     path: path.resolve(__dirname, 'build'),
-    publicPath: '/',
+    publicPath: '/'
   },
   module: {
+    exprContextCritical: false,
     rules: [
+      {
+        test: /\.json/,
+        use: [
+          {
+            loader: 'json-loader'
+          },
+        ],
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        // exclude: [/node_modules/, /data-store/],        
         use: [
           {
             loader: 'babel-loader',

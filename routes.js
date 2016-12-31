@@ -8,18 +8,58 @@ import SubPage from './app/templates/pages/SubPage.js';
 import Blog from './app/templates/blog';
 import NoMatch from './app/templates/pages/NoMatch.js';
 
-const App = ({data}) => (
-  <div>
-    <LayoutDefault data={data} />
-    <div className="container">
-      <Match exactly pattern="/" render={(props) => <Home {...props} data={data} />} />
-      <Match pattern="/sida-1" render={(props) => <SubPage {...props} data={data} />} />
-      <Match pattern="/sida-1/undersida-1" render={(props) => <SubPage {...props} data={data} />} />
-      <Match pattern="/blog" render={(props) => <Blog {...props} data={data} />} />
-      <Match pattern="/contact" render={(props) => <SubPage {...props} data={data} />} />
-      <Miss render={(props) => <NoMatch {...props} data={data} />} />
+import getData from './client/get-data';
+var helper = require('./data-store/helper.js');
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: this.props.data
+    };
+  }
+  
+  componentWillReceiveProps() {
+    getData(function(err, res) {
+      var data = helper.getPathData(location.pathname);
+      this.setState({data});
+    }.bind(this));
+    
+    // var data = helper.getPathData(location.pathname);
+    // this.setState({data});
+  }
+  
+  render() {
+    return (
+      <div>
+        <LayoutDefault data={this.state.data} />
+        <div className="container">
+          <Match exactly pattern="/" render={(props) => <Home {...props} data={this.state.data} />} />
+          <Match pattern="/sida-1" render={(props) => <SubPage {...props} data={this.state.data} />} />
+          <Match pattern="/sida-1/undersida-1" render={(props) => <SubPage {...props} data={this.state.data} />} />
+          <Match pattern="/blog" render={(props) => <Blog {...props} data={this.state.data} />} />
+          <Match pattern="/contact" render={(props) => <SubPage {...props} data={this.state.data} />} />
+          <Miss render={(props) => <NoMatch {...props} data={this.state.data} />} />
+        </div>
     </div>
-  </div>
-);
+    );
+  }
+}
 
 export default App;
+
+// const App = ({data}) => {
+//   return (
+//     <div>
+//       <LayoutDefault data={data} />
+//       <div className="container">
+//         <Match exactly pattern="/" render={(props) => <Home {...props} data={data} />} />
+//         <Match pattern="/sida-1" render={(props) => <SubPage {...props} data={data} />} />
+//         <Match pattern="/sida-1/undersida-1" render={(props) => <SubPage {...props} data={data} />} />
+//         <Match pattern="/blog" render={(props) => <Blog {...props} data={data} />} />
+//         <Match pattern="/contact" render={(props) => <SubPage {...props} data={data} />} />
+//         <Miss render={(props) => <NoMatch {...props} data={data} />} />
+//       </div>
+//     </div>
+//   );
+// }

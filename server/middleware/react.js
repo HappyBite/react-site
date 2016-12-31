@@ -9,7 +9,7 @@ import Routes from '../../routes';
 import Html from '../views/Html';
 
 export default function reactMiddleware(req, res) {
-  var data = helper.getData(req.url);
+  var data = helper.getPathData(req.url);
   
   const assets = require('../../build/static/assets.json'); // eslint-disable-line global-require, import/no-unresolved
   const context = createServerRenderContext();
@@ -28,7 +28,7 @@ export default function reactMiddleware(req, res) {
 
   let head = Helmet.rewind();
   const html = renderToStaticMarkup(
-    <Html head={head} assets={assets} markup={markup} data={data} />
+    <Html head={head} assets={assets} markup={markup} />
   );
   
   
