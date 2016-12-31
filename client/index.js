@@ -2,18 +2,14 @@ import React from 'react';
 import Router from 'react-router/BrowserRouter';
 import { render } from 'react-dom';
 
+import Routes from '../template/routes';
 import getData from './get-data';
 
-var helper = require('../data-store/helper.js');
-
 getData(function(err, data) {
-  var d = helper.getPathData(location.pathname);
-  startApp(d, location.pathname);
+  startApp(location.pathname);
 });
 
-import Routes from '../routes';
-
-function startApp(data, url) {
+function startApp(url) {
   render(
     <Router>
       <Routes url={url} />

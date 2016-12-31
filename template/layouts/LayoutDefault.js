@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import Navigation from '../components/Navigation';
+import Navigation from '../partials/Navigation';
 
 const LayoutDefault = ({data}) => {
   return (

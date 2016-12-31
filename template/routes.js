@@ -2,15 +2,15 @@ import React from 'react';
 import Match from 'react-router/Match';
 import Miss from 'react-router/Miss';
 
-import LayoutDefault from './app/layouts/LayoutDefault';
-import StartPage from './app/templates/pages/StartPage.js';
-import SubPage from './app/templates/pages/SubPage.js';
-import Blog from './app/templates/blog';
-import Portfolio from './app/templates/portfolio';
-import NoMatch from './app/templates/pages/NoMatch.js';
+import LayoutDefault from './layouts/LayoutDefault';
+import StartPage from './templates/pages/StartPage.js';
+import SubPage from './templates/pages/SubPage.js';
+import Blog from './templates/blog';
+import Portfolio from './templates/portfolio';
+import NoMatch from './templates/pages/NoMatch.js';
 
 // import getData from './client/get-data';
-var helper = require('./data-store/helper.js');
+var helper = require('../data-store/helper.js');
 
 class App extends React.Component {
   constructor(props) {

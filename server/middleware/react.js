@@ -3,7 +3,7 @@ import { ServerRouter, createServerRenderContext } from 'react-router';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import Helmet from "react-helmet";
 
-import Routes from '../../routes';
+import Routes from '../../template/routes';
 import Html from '../views/Html';
 
 export default function reactMiddleware(req, res) {
