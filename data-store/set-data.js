@@ -1,6 +1,6 @@
 var client = require('./cms-client');
 var async = require('async');
-var cache = require('./get-data');
+var cache = require('./cache');
 
 module.exports = function setData(cb) {
   if (typeof window === 'undefined') {

@@ -1,4 +1,4 @@
-import cache from './get-data';
+import cache from './cache';
 import querystring from 'querystring';
 
 module.exports = {

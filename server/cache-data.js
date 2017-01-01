@@ -1,4 +1,4 @@
-var cache = require('../data-store/get-data');
+var cache = require('../data-store/cache');
 var setData = require('../data-store/set-data');
 var AsyncLock = require('node-async-locks').AsyncLock;
 var lock = new AsyncLock();
