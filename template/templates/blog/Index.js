@@ -3,9 +3,9 @@ import Match from 'react-router/Match';
 
 import Category from './Category';
 
-const Blog = ({pathname}) => (
+const Blog = ({data, pathname}) => (
   <div>
-    <h1>Blog</h1>
+    <h1>{data.current_page.attributes.display_name}</h1>
     <Match pattern={`${pathname}/category/:slug`} component={Category} />
   </div>
 );

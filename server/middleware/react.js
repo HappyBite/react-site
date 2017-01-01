@@ -3,11 +3,11 @@ import { ServerRouter, createServerRenderContext } from 'react-router';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import Helmet from "react-helmet";
 
-import Routes from '../../template/routes';
+import Routes from '../../template/app';
 import Html from '../views/Html';
 
 export default function reactMiddleware(req, res) {
-  const assets = require('../../build/static/assets.json'); // eslint-disable-line global-require, import/no-unresolved
+  const assets = require('../../.build/static/assets.json'); // eslint-disable-line global-require, import/no-unresolved
   const context = createServerRenderContext();
   
   const markup = renderToString(

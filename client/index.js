@@ -2,10 +2,10 @@ import React from 'react';
 import Router from 'react-router/BrowserRouter';
 import { render } from 'react-dom';
 
-import Routes from '../template/routes';
-import getData from './get-data';
+import Routes from '../template/app';
+import setData from '../data-store/set-data';
 
-getData(function(err, data) {
+setData(function(err, data) {
   startApp(location.pathname);
 });
 

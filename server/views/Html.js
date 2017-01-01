@@ -1,19 +1,19 @@
 /* eslint-disable react/no-danger, react/prop-types */
 import React from 'react';
 
-export default ({ head, assets, markup, data }) => (
+export default ({ head, assets, markup }) => (
   <html lang="en">
     <head>
       {head.meta.toComponent()}
       {head.title.toComponent()}
-      {head.link.toComponent()}
+      <link rel="shortcut icon" href="/assets/favicon.svg" />
+      <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="/assets/css/style.css" />
     </head>
     <body>
       <div dangerouslySetInnerHTML={{ __html: markup }} id="root" />
-      {head.script.toComponent()}
-      {
-        // <div dangerouslySetInnerHTML={{ __html: `<div><script>window.data = '${JSON.stringify(data)}';</script></div>` }} />
-      }
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
+      <script src="/assets/js/bootstrap.min.js" />
       <script src={assets.vendor.js} />
       <script src={assets.main.js} />
     </body>

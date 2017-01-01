@@ -1,11 +1,9 @@
 import React from 'react';
-import Match from 'react-router/Match';
 
 const SubPage = ({ data, props }) => {
-  // console.log('DATA: ', data);
   return (
     <div>
-      <h1>SubPage</h1>
+      <h1>{data.current_page.attributes.display_name}</h1>
     </div>
   );
 };

@@ -2,9 +2,9 @@ var client = require('./cms-client');
 var async = require('async');
 var cache = require('./get-data');
 
-module.exports = {
-  setCache: function(cb) {
-    console.log('This will only show once!'); 
+module.exports = function setData(cb) {
+  if (typeof window === 'undefined') {
+    console.log('This will only show once!');
     async.parallel({
       item_types: function(callback) {
         client.itemTypes({}, function(err, itemTypes) {
@@ -42,7 +42,7 @@ module.exports = {
           } 
         });
       }
-    }, 
+    },
     function(err, results) { 
       var itemTypes = results.item_types; 
       var items = results.items;
@@ -117,21 +117,70 @@ module.exports = {
         } 
       }
       
-      /**
-       * Set cache
-       */ 
-      cache.set('item_types', itemTypes);
-      cache.set('items', items);
-      cache.set('meta', meta);
-      cache.set('media', media);
-      cache.set('item_dictionary', item_dictionary);
-      cache.set('media_dictionary', media_dictionary);
-      cache.set('bucket_meta_dictionary', bucket_meta_dictionary);
-      cache.set('routes', routes);
-      cache.set('page_routes', pageRoutes);
-      cache.set('pages', pages);
-      cache.set('version', Date.now());
+      var data = {
+        itemTypes,
+        items,
+        meta,
+        media,
+        item_dictionary,
+        media_dictionary,
+        bucket_meta_dictionary,
+        routes,
+        pageRoutes,
+        pages,
+        version: Date.now()
+      }
+      setCache(data);
       cb(null, cache);
     });
+  } else {
+    cache.set('items', null);
+    if (!cache.get('items')) {
+      var request = require('superagent');
+      // console.log('This will only show once!'); 
+      async.parallel({
+        data: function(callback) {
+          request
+            .get('/_data')
+            .set('Accept', 'application/json')
+            .end(function(err, res){
+              if (err) {
+                callback(null, res); 
+              } else {
+                callback(null, res);   
+              }
+            });
+        }
+      }, 
+      function(err, results) { 
+        if (err) {
+          cb('no_data');
+          return;
+        }
+        var data = results.data.body;
+        
+        setCache(data);
+        cb(null, cache);
+      });
+    } else {
+      cb(null, cache);
+    }
+  }
+  
+  /**
+   * Set cache
+   */ 
+  function setCache(data) {
+    cache.set('item_types', data.itemTypes);
+    cache.set('items', data.items);
+    cache.set('meta', data.meta);
+    cache.set('media', data.media);
+    cache.set('item_dictionary', data.item_dictionary);
+    cache.set('media_dictionary', data.media_dictionary);
+    cache.set('bucket_meta_dictionary', data.bucket_meta_dictionary);
+    cache.set('routes', data.routes);
+    cache.set('page_routes', data.pageRoutes);
+    cache.set('pages', data.pages);
+    cache.set('version', data.version);
   }
 };

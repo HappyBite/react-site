@@ -1,12 +1,12 @@
 var cache = require('../data-store/get-data');
-var setCache = require('../data-store/set-data');
+var setData = require('../data-store/set-data');
 var AsyncLock = require('node-async-locks').AsyncLock;
 var lock = new AsyncLock();
 
 module.exports = function(req, res, next) {
   lock.enter(function(token) {
     if (!cache.get('items')) {
-      setCache.setCache(function(err, data) {
+      setData(function(err, data) {
         if (err) {
           res.send('Failed connection to the API');
           lock.leave(token);
