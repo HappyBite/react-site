@@ -1,4 +1,4 @@
-var client = require('./cms-client');
+var twixly = require('./twixly-client');
 var async = require('async');
 var cache = require('./cache');
 
@@ -7,7 +7,7 @@ module.exports = function setData(cb) {
     console.log('This will only show once!');
     async.parallel({
       item_types: function(callback) {
-        client.itemTypes({}, function(err, itemTypes) {
+        twixly.itemTypes({}, function(err, itemTypes) {
           if (err) { 
             callback(err);
           } else {
@@ -16,7 +16,7 @@ module.exports = function setData(cb) {
         });
       },
       items: function(callback) {
-        client.items({}, function(err, items) {
+        twixly.items({}, function(err, items) {
           if (err) { 
             callback(err);
           } else {
@@ -25,7 +25,7 @@ module.exports = function setData(cb) {
         }); 
       },
       meta: function(callback) {
-        client.meta({}, function(err, items) {
+        twixly.meta({}, function(err, items) {
           if (err) {
             callback(err);
           } else {
@@ -34,7 +34,7 @@ module.exports = function setData(cb) {
         });
       },
       media: function(callback) {
-        client.media({}, function(err, items) {
+        twixly.media({}, function(err, items) {
           if (err) {
             callback(err);
           } else {

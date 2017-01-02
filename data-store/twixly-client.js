@@ -1,8 +1,8 @@
 var bucketId = process.env.BUCKET_ID;
 var accessToken = process.env.ACCESS_TOKEN;
 
-var cms = require('../node_modules/sdk/index.js');
-var client = new cms.Client({
+var twixly = require('../node_modules/sdk/index.js');
+var client = new twixly.Client({
   bucket: bucketId,
   accessToken: accessToken
 });
