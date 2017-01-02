@@ -3,7 +3,7 @@ import { ServerRouter, createServerRenderContext } from 'react-router';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import Helmet from "react-helmet";
 
-import Routes from '../../template/app';
+import App from '../../template/app';
 import Html from '../views/Html';
 
 export default function reactMiddleware(req, res) {
@@ -12,7 +12,7 @@ export default function reactMiddleware(req, res) {
   
   const markup = renderToString(
     <ServerRouter location={req.url} context={context}>
-      <Routes url={req.url} />
+      <App url={req.url} />
     </ServerRouter>
   );
 

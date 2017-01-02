@@ -17,26 +17,3 @@ module.exports = {
     return data;
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -11,6 +11,7 @@ const App = ({url}) => {
   let data = helper.getPathData(url);
   
   if (!data.current_page) {
+    console.log(url);
     console.log('NO DATA');
     return false;
   }

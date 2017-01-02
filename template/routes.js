@@ -15,12 +15,12 @@ const Routes = ({data}) => (
         var page = data.pages[key];
         if (page.attributes.start_page) {
           return <Match key={index} exactly pattern={key} render={(props) => <StartPage {...props} data={data} />} />;
+        } else if (page.meta.item_type.data.id === 'sub-page') {
+          return <Match key={index} exactly pattern={key} render={(props) => <SubPage {...props} data={data} />} />;
         } else if (page.meta.item_type.data.id === 'blog') {
           return <Match key={index} exactly pattern={key} render={(props) => <Blog {...props} data={data} />} />;
         } else if (page.meta.item_type.data.id === 'portfolio') {
           return <Match key={index} exactly pattern={key} render={(props) => <Portfolio {...props} data={data} />} />;
-        } else if (page.meta.item_type.data.id === 'sub-page') {
-          return <Match key={index} exactly pattern={key} render={(props) => <SubPage {...props} data={data} />} />;
         }
       })
     }
