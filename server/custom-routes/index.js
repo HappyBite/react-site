@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var cache = require('../../data-store/get-data');
+var cache = require('../../data-store/cache');
 var helper = require('../../data-store/helper.js');
 var etag = require('etag');
 
@@ -9,8 +9,8 @@ router.get('/_data', function (req, res) {
     //   console.log('v2:', cache.get('version'));
     //   console.log(etag(cache.get('version').toString()));
     // }
-    var bucketVersion = cache.get('version') ? 
-                        cache.get('version').toString() :
+    var bucketVersion = cache.get('data') ? 
+                        cache.get('data').version.toString() :
                         null;
     if (!bucketVersion) {
         console.log('You have to handle this!');
@@ -25,11 +25,11 @@ router.get('/_data', function (req, res) {
     // console.log('v1:', cache.get('version'));
     // console.log('v1e:', etag(cache.get('version').toString()));
     res.setHeader('ETag', etag(bucketVersion));
-    res.json(helper.getPayload(req.url));
+    res.json(cache.get('data'));
 });
 
 router.get('/_clear-cache', function (req, res) {
-    cache.set('items', null);
+    cache.set('data', null);
     res.send('Cache cleared successfully!');
 });
 

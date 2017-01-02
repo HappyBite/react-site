@@ -5,7 +5,7 @@ var lock = new AsyncLock();
 
 module.exports = function(req, res, next) {
   lock.enter(function(token) {
-    if (!cache.get('items')) {
+    if (!cache.get('data')) {
       setData(function(err, data) {
         if (err) {
           res.send('Failed connection to the API');

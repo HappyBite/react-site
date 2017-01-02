@@ -130,14 +130,14 @@ module.exports = function setData(cb) {
         pages,
         version: Date.now()
       }
-      setCache(data);
-      cb(null, cache);
+      cache.set('data', data);
+      cb(null, data);
     });
   } else {
-    cache.set('items', null);
-    if (!cache.get('items')) {
+    cache.set('data', null);
+    if (!cache.get('data')) {
       var request = require('superagent');
-      // console.log('This will only show once!'); 
+      console.log('This will only show once!'); 
       async.parallel({
         data: function(callback) {
           request
@@ -158,29 +158,11 @@ module.exports = function setData(cb) {
           return;
         }
         var data = results.data.body;
-        
-        setCache(data);
-        cb(null, cache);
+        cache.set('data', data);
+        cb(null, data);
       });
     } else {
       cb(null, cache);
     }
-  }
-  
-  /**
-   * Set cache
-   */ 
-  function setCache(data) {
-    cache.set('item_types', data.itemTypes);
-    cache.set('items', data.items);
-    cache.set('meta', data.meta);
-    cache.set('media', data.media);
-    cache.set('item_dictionary', data.item_dictionary);
-    cache.set('media_dictionary', data.media_dictionary);
-    cache.set('bucket_meta_dictionary', data.bucket_meta_dictionary);
-    cache.set('routes', data.routes);
-    cache.set('page_routes', data.pageRoutes);
-    cache.set('pages', data.pages);
-    cache.set('version', data.version);
   }
 };

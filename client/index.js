@@ -3,9 +3,9 @@ import Router from 'react-router/BrowserRouter';
 import { render } from 'react-dom';
 
 import Routes from '../template/app';
-import setData from '../data-store/set-data';
+import getData from '../data-store/get-data';
 
-setData(function(err, data) {
+getData(function(err, data) {
   startApp(location.pathname);
 });
 

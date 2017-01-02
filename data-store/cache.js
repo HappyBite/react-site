@@ -11,19 +11,7 @@ if (typeof window !== 'undefined') {
   }
 } else {
   cache = require('nconf');
-  // Init cache
   cache.argv().env();
-  cache.add('system', {type: 'file', file: 'dummy: has to be here to get set to work'});
-  // var storage = require('node-persist');
-  // storage.initSync();
-  // cache = {
-  // get: function(key) {
-  //    return storage.getItemSync(key);
-  //  },
-  //  set: function(key, value) {
-  //    storage.setItemSync(key, value);
-  //  }
-  //}
 }
 
 module.exports = cache;
