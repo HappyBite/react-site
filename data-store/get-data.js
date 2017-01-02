@@ -134,35 +134,30 @@ module.exports = function setData(cb) {
       cb(null, data);
     });
   } else {
-    cache.set('data', null);
-    if (!cache.get('data')) {
-      var request = require('superagent');
-      console.log('This will only show once!'); 
-      async.parallel({
-        data: function(callback) {
-          request
-            .get('/_data')
-            .set('Accept', 'application/json')
-            .end(function(err, res){
-              if (err) {
-                callback(null, res); 
-              } else {
-                callback(null, res);   
-              }
-            });
-        }
-      }, 
-      function(err, results) { 
-        if (err) {
-          cb('no_data');
-          return;
-        }
-        var data = results.data.body;
-        cache.set('data', data);
-        cb(null, data);
-      });
-    } else {
-      cb(null, cache);
-    }
+    var request = require('superagent');
+    console.log('This will only show once!'); 
+    async.parallel({
+      data: function(callback) {
+        request
+          .get('/_data')
+          .set('Accept', 'application/json')
+          .end(function(err, res){
+            if (err) {
+              callback(null, res); 
+            } else {
+              callback(null, res);   
+            }
+          });
+      }
+    }, 
+    function(err, results) { 
+      if (err) {
+        cb('no_data');
+        return;
+      }
+      var data = results.data.body;
+      cache.set('data', data);
+      cb(null, data);
+    });
   }
 };
