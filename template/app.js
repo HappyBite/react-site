@@ -3,10 +3,8 @@ import LayoutDefault from './layouts/Default';
 
 var helper = require('../data-store/helper.js');
 
-const App = ({url}) => {
-  url = typeof location !== 'undefined' ?
-        location.pathname : 
-        url;
+const App = ({location}) => {
+  const url = location.getUrl();
   
   let data = helper.getPathData(url);
   

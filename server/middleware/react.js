@@ -12,7 +12,7 @@ export default function reactMiddleware(req, res) {
   
   const markup = renderToString(
     <ServerRouter location={req.url} context={context}>
-      <App url={req.url} />
+      <App location={{ getUrl: function() { return req.url } }} />
     </ServerRouter>
   );
 

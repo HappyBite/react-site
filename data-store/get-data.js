@@ -3,7 +3,7 @@ var async = require('async');
 var cache = require('./cache');
 
 module.exports = function setData(cb) {
-  console.log('This will only show once!');
+  // console.log('This will only show once!');
   async.parallel({
     items: function(callback) {
       twixly.items({}, function(err, items) {
