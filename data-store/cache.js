@@ -1,5 +1,4 @@
 var cache;
-
 if (typeof window !== 'undefined') {
   cache = {
     get: function(key) {

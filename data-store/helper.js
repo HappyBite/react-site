@@ -1,13 +1,12 @@
 import cache from './cache';
-import querystring from 'querystring';
 
 module.exports = {
   /**
    * getPathData
-   * Description: Yields data form current path to use in react components
+   * Description: Yields data from current path to use in react components
    * Todo: This should make a request to the API and cache it
    * @param {string} url
-   * @return {object} Sorted bucket data
+   * @return {object} Relevant bucket data
    */
   getPathData: function(url) {
     var data = {};
