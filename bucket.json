@@ -1,0 +1,1786 @@
+{
+  "bucket": {
+    "item_types": [
+      {
+        "data": {
+          "type": "item-types",
+          "id": "nav-menu-item",
+          "attributes": {
+            "title": "Navigation",
+            "display_field": "display_name",
+            "schema": {
+              "properties": {
+                "display_name": {
+                  "type": "string",
+                  "required": true,
+                  "field": {
+                    "placeholder": "Menynamn"
+                  }
+                },
+                "slug": {
+                  "type": "slug",
+                  "unique_with": [
+                    "meta.parent_id",
+                    "meta.item_type.data.id"
+                  ],
+                  "populate_from": "display_name",
+                  "required": true,
+                  "field": {
+                    "placeholder": "Slugg"
+                  }
+                },
+                "path": {
+                  "type": "string",
+                  "title": "Relativ URL",
+                  "generate_path_property": "path",
+                  "field": {
+                    "type": "hidden"
+                  }
+                },
+                "start_page": {
+                  "type": "boolean",
+                  "title": "Sätt som startsida"
+                },
+                "page": {
+                  "type": "relationship",
+                  "title": "Sida",
+                  "data": {
+                    "type": "items",
+                    "condition": {
+                      "property": "show_in_page_menu",
+                      "value": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "meta": {
+            "position": 0,
+            "status": "published",
+            "options": {
+              "icon": "file",
+              "show_in_dashboard": true,
+              "labels": {
+                "plural_name": "sidor",
+                "singular_name": "sida",
+                "definite_form_name": "sidan",
+                "add": "skapa",
+                "edit": "ändra",
+                "delete": "ta bort"
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "item-types",
+          "id": "start-page",
+          "attributes": {
+            "title": "Startsida",
+            "display_field": "title",
+            "schema": {
+              "properties": {
+                "slider": {
+                  "type": "array",
+                  "title": "Slider",
+                  "items": {
+                    "type": "object",
+                    "title": "Slide",
+                    "properties": {
+                      "heading": {
+                        "type": "string",
+                        "title": "Rubrik"
+                      },
+                      "excerpt": {
+                        "type": "string",
+                        "title": "Underrubrik"
+                      },
+                      "text": {
+                        "type": "string",
+                        "title": "Text",
+                        "field": {
+                          "type": "text",
+                          "height": "100px"
+                        }
+                      },
+                      "image": {
+                        "type": "relationship",
+                        "title": "Bild",
+                        "multiple": false,
+                        "data": [
+                          {
+                            "type": "media"
+                          }
+                        ]
+                      },
+                      "link": {
+                        "type": "string",
+                        "title": "Länk",
+                        "format": "uri"
+                      },
+                      "link_text": {
+                        "type": "string",
+                        "title": "Länktext"
+                      }
+                    }
+                  }
+                },
+                "features_title": {
+                  "type": "string",
+                  "title": "Features - Titel"
+                },
+                "features": {
+                  "type": "array",
+                  "title": "Features",
+                  "items": {
+                    "type": "object",
+                    "title": "Feature",
+                    "properties": {
+                      "heading": {
+                        "type": "string",
+                        "title": "Rubrik"
+                      },
+                      "text": {
+                        "type": "string",
+                        "title": "Text",
+                        "field": {
+                          "type": "text",
+                          "height": "100px"
+                        }
+                      },
+                      "icon": {
+                        "type": "string",
+                        "title": "Ikon",
+                        "enum": [
+                          "gears",
+                          "arrows-alt",
+                          "refresh",
+                          "plus",
+                          "envelope-o",
+                          "picture-o"
+                        ],
+                        "field": {
+                          "option_labels": [
+                            "gears",
+                            "arrows-alt",
+                            "refresh",
+                            "plus",
+                            "envelope-o",
+                            "picture-o"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "slider_rel": {
+                  "type": "relationship",
+                  "title": "Slider",
+                  "multiple": true,
+                  "mode": "inline",
+                  "disabled": true,
+                  "data": [
+                    {
+                      "id": "slider",
+                      "type": "items"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "meta": {
+            "position": 1,
+            "status": "published",
+            "options": {
+              "icon": "book",
+              "show_in_page_menu": true,
+              "labels": {
+                "plural_name": "startsidor",
+                "singular_name": "startsida",
+                "definite_form_name": "startsidan",
+                "add": "skapa ny",
+                "edit": "ändra",
+                "delete": "ta bort"
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "item-types",
+          "id": "sub-page",
+          "attributes": {
+            "title": "Undersida",
+            "display_field": "title",
+            "schema": {
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "Titel"
+                },
+                "excerpt": {
+                  "type": "text",
+                  "title": "Sammanfattning",
+                  "field": {
+                    "height": "100px"
+                  }
+                },
+                "body": {
+                  "type": "text",
+                  "title": "Innehåll"
+                }
+              }
+            }
+          },
+          "meta": {
+            "position": 2,
+            "status": "published",
+            "options": {
+              "icon": "file",
+              "show_in_page_menu": true,
+              "labels": {
+                "plural_name": "undersidor",
+                "singular_name": "undersida",
+                "add": "skapa ny",
+                "edit": "ändra",
+                "delete": "ta bort"
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "item-types",
+          "id": "link",
+          "attributes": {
+            "title": "Länk",
+            "schema": {
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "title": "URL",
+                  "format": "uri",
+                  "required": true
+                },
+                "target": {
+                  "type": "string",
+                  "title": "Target",
+                  "enum": [
+                    "_blank",
+                    "_self",
+                    "_parent",
+                    "_top"
+                  ],
+                  "field": {
+                    "option_labels": [
+                      "_blank",
+                      "_self",
+                      "_parent",
+                      "_top"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "meta": {
+            "position": 3,
+            "status": "published",
+            "options": {
+              "icon": "file",
+              "show_in_page_menu": true,
+              "labels": {
+                "plural_name": "länkar",
+                "singular_name": "länk",
+                "definite_form_name": "länken",
+                "add": "skapa",
+                "edit": "ändra",
+                "delete": "ta bort"
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "item-types",
+          "id": "blog",
+          "attributes": {
+            "title": "Blogg",
+            "display_field": "title",
+            "schema": {
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "Titel",
+                  "description": "Denna sida är en platshållare för din blogg som visas i navigationen på webblatsen. För att ändra i bloggen klickar du på blogg-länken i menyn till vänster.",
+                  "required": true
+                }
+              }
+            }
+          },
+          "meta": {
+            "position": 4,
+            "status": "published",
+            "options": {
+              "icon": "file",
+              "show_in_page_menu": true,
+              "labels": {
+                "plural_name": "bloggar",
+                "singular_name": "blogg",
+                "definite_form_name": "bloggen",
+                "add": "lägg till",
+                "edit": "ändra",
+                "delete": "ta bort"
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "item-types",
+          "id": "blog-post",
+          "attributes": {
+            "title": "Bloggpost",
+            "display_field": "title",
+            "schema": {
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "Titel",
+                  "required": true
+                },
+                "slug": {
+                  "type": "slug",
+                  "title": "Slugg",
+                  "unique_with": [
+                    "meta.parent_id",
+                    "meta.item_type.data.id"
+                  ],
+                  "populate_from": "title",
+                  "required": true
+                },
+                "summary": {
+                  "type": "text",
+                  "title": "Sammanfattning",
+                  "field": {
+                    "height": "100px"
+                  }
+                },
+                "body": {
+                  "type": "text",
+                  "title": "Innehåll",
+                  "format": "markdown"
+                },
+                "image": {
+                  "type": "relationship",
+                  "title": "Image",
+                  "data": [
+                    {
+                      "type": "media"
+                    }
+                  ]
+                },
+                "categories": {
+                  "type": "relationship",
+                  "title": "Kategorier",
+                  "multiple": true,
+                  "data": [
+                    {
+                      "type": "items",
+                      "id": "blog-post-category"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "meta": {
+            "position": 5,
+            "status": "published",
+            "options": {
+              "icon": "book",
+              "show_in_menu": false,
+              "show_in_dashboard": true,
+              "sort": "-meta.created_at",
+              "labels": {
+                "plural_name": "bloggposter",
+                "singular_name": "bloggpost",
+                "definite_form_name": "bloggposten",
+                "add": "lägg till",
+                "edit": "ändra",
+                "delete": "ta bort"
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "item-types",
+          "id": "blog-post-category",
+          "attributes": {
+            "title": "Bloggkategori",
+            "display_field": "title",
+            "schema": {
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "Titel",
+                  "required": true
+                },
+                "slug": {
+                  "type": "slug",
+                  "title": "Slugg",
+                  "populate_from": "title",
+                  "required": true
+                },
+                "posts": {
+                  "type": "relationship",
+                  "title": "Poster",
+                  "multiple": true,
+                  "data": [
+                    {
+                      "type": "items",
+                      "id": "blog-post"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "meta": {
+            "position": 6,
+            "status": "published",
+            "options": {
+              "icon": "file",
+              "labels": {
+                "plural_name": "kategorier",
+                "singular_name": "kategori",
+                "definite_form_name": "kategorin",
+                "add": "lägg till",
+                "edit": "ändra",
+                "delete": "ta bort"
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "item-types",
+          "id": "blog-settings",
+          "attributes": {
+            "title": "Blogginställningar",
+            "schema": {
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "Titel",
+                  "required": true
+                },
+                "summary": {
+                  "type": "text",
+                  "title": "Sammanfattning",
+                  "field": {
+                    "height": "100px"
+                  }
+                },
+                "object": {
+                  "type": "object",
+                  "title": "Object",
+                  "area": "sidebar",
+                  "properties": {
+                    "heading": {
+                      "type": "string",
+                      "title": "String",
+                      "placeholder": "Skriv din rubrik här..."
+                    },
+                    "text": {
+                      "type": "text",
+                      "title": "Text",
+                      "placeholder": "Skriv din text här...",
+                      "efault_value": "Text",
+                      "field": {
+                        "height": "100px"
+                      }
+                    },
+                    "symbol": {
+                      "type": "string",
+                      "format": "symbol",
+                      "title": "Symbol",
+                      "default_value": "",
+                      "field": {
+                        "slugify": "heading"
+                      }
+                    },
+                    "url": {
+                      "type": "string",
+                      "title": "URL",
+                      "format": "uri",
+                      "placeholder": "http://www.example.com"
+                    }
+                  }
+                }
+              }
+            },
+            "options": {
+              "form": {
+                "tabs": [
+                  {
+                    "display_name": "General",
+                    "properties": [
+                      "title",
+                      "summary"
+                    ]
+                  },
+                  {
+                    "display_name": "Pagination",
+                    "properties": [
+                      "summary"
+                    ]
+                  },
+                  {
+                    "display_name": "Fields",
+                    "properties": [
+                      "title",
+                      "object"
+                    ]
+                  }
+                ],
+                "layout": {
+                  "sidebar": [
+                    "object"
+                  ]
+                }
+              }
+            }
+          },
+          "meta": {
+            "position": 7,
+            "status": "published",
+            "options": {
+              "icon": "cogs",
+              "show_in_menu": false,
+              "show_in_dashboard": false,
+              "labels": {
+                "plural_name": "blogginställningar",
+                "singular_name": "blogginställning",
+                "definite_form_name": "bloginställningen",
+                "add": "lägg till",
+                "edit": "ändra",
+                "delete": "ta bort"
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "item-types",
+          "id": "portfolio",
+          "attributes": {
+            "title": "Portfolio",
+            "display_field": "title",
+            "schema": {
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "Titel",
+                  "description": "Denna sida är en platshållare för din portfolio som visas i navigationen på webblatsen. För att ändra i portfolion klickar du på portfolio-länken i menyn till vänster.",
+                  "required": true
+                }
+              }
+            }
+          },
+          "meta": {
+            "position": 8,
+            "status": "published",
+            "options": {
+              "icon": "file",
+              "show_in_page_menu": true,
+              "labels": {
+                "plural_name": "portfolios",
+                "singular_name": "portfolio",
+                "definite_form_name": "portfolion",
+                "add": "lägg till",
+                "edit": "ändra",
+                "delete": "ta bort"
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "item-types",
+          "id": "portfolio-post",
+          "attributes": {
+            "title": "Portfoliopost",
+            "display_field": "title",
+            "schema": {
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "Titel",
+                  "required": true
+                },
+                "slug": {
+                  "type": "slug",
+                  "title": "Slugg",
+                  "unique_with": [
+                    "meta.parent_id",
+                    "meta.item_type.data.id"
+                  ],
+                  "populate_from": "title",
+                  "required": true
+                },
+                "summary": {
+                  "type": "string",
+                  "title": "Sammanfattning",
+                  "field": {
+                    "type": "textarea",
+                    "height": "100px"
+                  }
+                },
+                "body": {
+                  "type": "text",
+                  "title": "Innehåll",
+                  "format": "markdown"
+                },
+                "image": {
+                  "type": "relationship",
+                  "title": "Bild",
+                  "multiple": true,
+                  "data": [
+                    {
+                      "type": "media"
+                    }
+                  ]
+                }
+              }
+            },
+            "options": {
+              "form": {
+                "layout": {
+                  "sidebar": [
+                    "image"
+                  ]
+                }
+              }
+            }
+          },
+          "meta": {
+            "position": 9,
+            "status": "published",
+            "options": {
+              "icon": "book",
+              "show_in_dashboard": true,
+              "labels": {
+                "plural_name": "portfolioposter",
+                "singular_name": "portfoliopost",
+                "definite_form_name": "portfolioposten",
+                "add": "lägg till",
+                "edit": "ändra",
+                "delete": "ta bort"
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "item-types",
+          "id": "catalog-product",
+          "attributes": {
+            "title": "Produkt",
+            "display_field": "title",
+            "schema": {
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "Titel",
+                  "required": true
+                },
+                "summary": {
+                  "type": "text",
+                  "title": "Sammanfattning",
+                  "field": {
+                    "height": "100px"
+                  }
+                },
+                "body": {
+                  "type": "text",
+                  "title": "Innehåll",
+                  "format": "markdown"
+                },
+                "image": {
+                  "type": "relationship",
+                  "title": "Image",
+                  "multiple": false,
+                  "required": true,
+                  "data": [
+                    {
+                      "type": "items",
+                      "id": "image"
+                    },
+                    {
+                      "type": "items",
+                      "id": "start-page"
+                    },
+                    {
+                      "type": "items",
+                      "id": "sub-page"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "meta": {
+            "position": 10,
+            "status": "published",
+            "options": {
+              "icon": "book",
+              "show_in_dashboard": true,
+              "labels": {
+                "plural_name": "produkter",
+                "singular_name": "produkt",
+                "definite_form_name": "produkten",
+                "add": "lägg till",
+                "edit": "ändra",
+                "delete": "ta bort"
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "item-types",
+          "id": "image",
+          "attributes": {
+            "title": "Bild",
+            "display_field": "title",
+            "schema": {
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "Titel"
+                }
+              }
+            }
+          },
+          "meta": {
+            "position": 11,
+            "status": "published",
+            "options": {
+              "icon": "file",
+              "labels": {
+                "plural_name": "bilder",
+                "singular_name": "bild",
+                "add": "skapa ny",
+                "edit": "ändra",
+                "delete": "ta bort"
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "item-types",
+          "id": "c10-config",
+          "attributes": {
+            "title": "C10 - Konfiguration",
+            "schema": {
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "Titel"
+                },
+                "config": {
+                  "type": "string",
+                  "title": "Konfiguration",
+                  "format": "json"
+                }
+              }
+            }
+          },
+          "meta": {
+            "position": 12,
+            "status": "published"
+          }
+        }
+      }
+    ],
+    "items": [
+      {
+        "data": {
+          "type": "items",
+          "id": "56ba709d9cd1962f7b30f02d",
+          "attributes": {
+            "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n\r\n## Lorem ipsum dolor\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+            "slug": "bloggpost-1",
+            "title": "Bloggpost 1"
+          },
+          "relationships": {
+            "categories": {
+              "data": [
+                {
+                  "meta": {
+                    "item_type": {
+                      "data": {
+                        "id": "blog-post-category",
+                        "type": "item-types"
+                      }
+                    }
+                  },
+                  "id": "56ba71449cd1962f7b30f032",
+                  "type": "items"
+                }
+              ]
+            },
+            "image": {
+              "data": {
+                "id": "56ba75249cd1962f7b30f044",
+                "type": "media"
+              }
+            }
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "blog-post"
+              }
+            },
+            "position": 0,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "56ba715a9cd1962f7b30f034",
+          "attributes": {
+            "title": "CSS",
+            "slug": "css"
+          },
+          "relationships": {
+            "posts": {
+              "data": []
+            }
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "blog-post-category"
+              }
+            },
+            "position": 0,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "56ba709d9cd1962f7b30f027",
+          "attributes": {
+            "title": "Produkt 1",
+            "summary": "Sammanfattning",
+            "body": "Innehåll"
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "catalog-product"
+              }
+            },
+            "position": 0,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "56ba709d9cd1962f7b30f025",
+          "attributes": {
+            "display_name": "Startsida",
+            "slug": "startsida",
+            "start_page": true,
+            "path": "/startsida"
+          },
+          "relationships": {
+            "page": {
+              "data": {
+                "type": "items",
+                "id": "startpage",
+                "meta": {
+                  "item_type": {
+                    "data": {
+                      "type": "item-types",
+                      "id": "start-page"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "nav-menu-item"
+              }
+            },
+            "position": 0,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "56ba709d9cd1962f7b30f024",
+          "attributes": {
+            "title": "Portfoliopost 1",
+            "slug": "portfoliopost-1",
+            "summary": "Sammanfattning",
+            "body": "Innehåll"
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "portfolio-post"
+              }
+            },
+            "position": 0,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "startpage",
+          "attributes": {
+            "title": "Startsida",
+            "lead": "Sammanfattning",
+            "body": "Innehåll",
+            "slider": [
+              {
+                "heading": "Fully Responsive Design",
+                "excerpt": "Looks great on all major browsers, tablets and phones",
+                "text": "Powerful responsive theme great for corporate websites, web & mobile apps. Built with Bootstrap 3, it combines all of its great features with our clean user-friendly layout.",
+                "image": {
+                  "data": {
+                    "type": "media",
+                    "id": "image-1"
+                  }
+                },
+                "link": "",
+                "link_text": ""
+              },
+              {
+                "heading": "Lorem ipsum",
+                "excerpt": "",
+                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius, tincidunt odio nec, placerat enim.",
+                "image": {
+                  "data": {
+                    "type": "media",
+                    "id": "image-2"
+                  }
+                },
+                "link": "",
+                "link_text": ""
+              }
+            ],
+            "introduction": {
+              "type": "text",
+              "title": "Introduction",
+              "format": "markdown",
+              "field": {
+                "height": "100px"
+              }
+            },
+            "features_title": "Key features",
+            "features": [
+              {
+                "heading": "Build with Bootstrap 3",
+                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius, tincidunt odio nec, placerat enim.",
+                "icon": "gears"
+              },
+              {
+                "heading": "Responsive design",
+                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius, tincidunt odio nec, placerat enim.",
+                "icon": "arrows-alt"
+              },
+              {
+                "heading": "Easy to customize",
+                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius, tincidunt odio nec, placerat enim.",
+                "icon": "refresh"
+              },
+              {
+                "heading": "15+ templates included",
+                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius, tincidunt odio nec, placerat enim.",
+                "icon": "plus"
+              },
+              {
+                "heading": "24/7 support",
+                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius, tincidunt odio nec, placerat enim.",
+                "icon": "envelope-o"
+              },
+              {
+                "heading": "Isotope gallery",
+                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius, tincidunt odio nec, placerat enim.",
+                "icon": "picture-o"
+              }
+            ],
+            "name": "Startsida",
+            "slug": "startsida"
+          },
+          "relationships": {
+            "slider_rel": {
+              "data": [
+                {
+                  "id": "slider-1",
+                  "type": "items",
+                  "meta": {
+                    "item_type": {
+                      "data": {
+                        "id": "slider",
+                        "type": "item-types"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "slider-2",
+                  "type": "items",
+                  "meta": {
+                    "item_type": {
+                      "data": {
+                        "id": "slider",
+                        "type": "item-types"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "start-page"
+              }
+            },
+            "position": 0,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "subpage-3",
+          "attributes": {
+            "title": "Sida 3",
+            "excerpt": "Sammanfattning",
+            "body": "Innehåll"
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "sub-page"
+              }
+            },
+            "position": 0,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "56ba709d9cd1962f7b30f02e",
+          "attributes": {
+            "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n\r\n## Lorem ipsum dolor\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+            "slug": "bloggpost-2",
+            "title": "Bloggpost 2"
+          },
+          "relationships": {
+            "categories": {
+              "data": [
+                {
+                  "meta": {
+                    "item_type": {
+                      "data": {
+                        "id": "blog-post-category",
+                        "type": "item-types"
+                      }
+                    }
+                  },
+                  "id": "56ba715a9cd1962f7b30f034",
+                  "type": "items"
+                },
+                {
+                  "meta": {
+                    "item_type": {
+                      "data": {
+                        "id": "blog-post-category",
+                        "type": "item-types"
+                      }
+                    }
+                  },
+                  "id": "56ba71519cd1962f7b30f033",
+                  "type": "items"
+                }
+              ]
+            },
+            "image": {
+              "data": {
+                "id": "56ba75249cd1962f7b30f044",
+                "type": "media"
+              }
+            }
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "blog-post"
+              }
+            },
+            "position": 1,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "56ba71519cd1962f7b30f033",
+          "attributes": {
+            "title": "HTML5",
+            "slug": "html5"
+          },
+          "relationships": {
+            "posts": {
+              "data": []
+            }
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "blog-post-category"
+              }
+            },
+            "position": 1,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "56ba709d9cd1962f7b30f02a",
+          "attributes": {
+            "title": "Produkt 2",
+            "summary": "Sammanfattning",
+            "body": "Innehåll"
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "catalog-product"
+              }
+            },
+            "position": 1,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "56ba709d9cd1962f7b30f023",
+          "attributes": {
+            "display_name": "Sida 1",
+            "slug": "sida-1",
+            "path": "/sida-1"
+          },
+          "relationships": {
+            "page": {
+              "data": {
+                "type": "items",
+                "id": "subpage-1",
+                "meta": {
+                  "item_type": {
+                    "data": {
+                      "type": "item-types",
+                      "id": "sub-page"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "nav-menu-item"
+              }
+            },
+            "position": 1,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "56ba709d9cd1962f7b30f02f",
+          "attributes": {
+            "title": "Portfoliopost 2",
+            "slug": "portfoliopost-2",
+            "summary": "Sammanfattning",
+            "body": "Innehåll"
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "portfolio-post"
+              }
+            },
+            "position": 1,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "contact-us",
+          "attributes": {
+            "title": "Kontakta oss",
+            "excerpt": "Sammanfattning",
+            "body": "Innehåll"
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "sub-page"
+              }
+            },
+            "position": 1,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "56ba71449cd1962f7b30f032",
+          "attributes": {
+            "title": "Design",
+            "slug": "design"
+          },
+          "relationships": {
+            "posts": {
+              "data": []
+            }
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "blog-post-category"
+              }
+            },
+            "position": 2,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "56ba709d9cd1962f7b30f02b",
+          "attributes": {
+            "display_name": "Sida 2",
+            "slug": "sida-2",
+            "path": "/sida-2"
+          },
+          "relationships": {
+            "page": {
+              "data": {
+                "type": "items",
+                "id": "subpage-2",
+                "meta": {
+                  "item_type": {
+                    "data": {
+                      "type": "item-types",
+                      "id": "sub-page"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "nav-menu-item"
+              }
+            },
+            "position": 2,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "subpage-2",
+          "attributes": {
+            "title": "Sida 2",
+            "excerpt": "Sammanfattning",
+            "body": "Innehåll"
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "sub-page"
+              }
+            },
+            "position": 2,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "56ba709d9cd1962f7b30f02c",
+          "attributes": {
+            "display_name": "Sida 3",
+            "slug": "sida-3",
+            "path": "/sida-3"
+          },
+          "relationships": {
+            "page": {
+              "data": {
+                "type": "items",
+                "id": "subpage-3",
+                "meta": {
+                  "item_type": {
+                    "data": {
+                      "type": "item-types",
+                      "id": "sub-page"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "nav-menu-item"
+              }
+            },
+            "position": 3,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "subpage-1",
+          "attributes": {
+            "title": "Sida 1",
+            "excerpt": "Sammanfattning",
+            "body": "Innehåll"
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "sub-page"
+              }
+            },
+            "position": 3,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "56ba709d9cd1962f7b30f026",
+          "attributes": {
+            "display_name": "Portfolio",
+            "slug": "portfolio",
+            "path": "/portfolio"
+          },
+          "relationships": {
+            "page": {
+              "data": {
+                "type": "items",
+                "id": "portfolio",
+                "meta": {
+                  "item_type": {
+                    "data": {
+                      "type": "item-types",
+                      "id": "portfolio"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "nav-menu-item"
+              }
+            },
+            "position": 4,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "portfolio",
+          "attributes": {
+            "title": "Portfolio",
+            "name": "Portfolio",
+            "slug": "Portfolio"
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "portfolio"
+              }
+            },
+            "position": 4,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "blog",
+          "attributes": {
+            "title": "Blogg",
+            "name": "Blogg",
+            "slug": "blogg"
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "blog"
+              }
+            },
+            "position": 5,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "56ba709d9cd1962f7b30f029",
+          "attributes": {
+            "display_name": "Blogg",
+            "slug": "blogg",
+            "path": "/blogg"
+          },
+          "relationships": {
+            "page": {
+              "data": {
+                "type": "items",
+                "id": "blog",
+                "meta": {
+                  "item_type": {
+                    "data": {
+                      "type": "item-types",
+                      "id": "blog"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "nav-menu-item"
+              }
+            },
+            "position": 5,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "56ba709d9cd1962f7b30f028",
+          "attributes": {
+            "display_name": "Kontakta oss",
+            "slug": "contact-us",
+            "path": "/contact-us"
+          },
+          "relationships": {
+            "page": {
+              "data": {
+                "type": "items",
+                "id": "contact-us",
+                "meta": {
+                  "item_type": {
+                    "data": {
+                      "type": "item-types",
+                      "id": "sub-page"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "nav-menu-item"
+              }
+            },
+            "position": 6,
+            "status": "published"
+          }
+        }
+      },
+      {
+        "data": {
+          "type": "items",
+          "id": "admin-menu",
+          "attributes": {
+            "title": "Admin Menu",
+            "config": [
+              {
+                "display_name": "Sidor",
+                "icon": "file",
+                "item_type": "nav-menu-item"
+              },
+              {
+                "display_name": "Blogg",
+                "icon": "book",
+                "items": [
+                  {
+                    "display_name": "Poster",
+                    "icon": "book",
+                    "item_type": "blog-post"
+                  },
+                  {
+                    "display_name": "Kategorier",
+                    "icon": "book",
+                    "item_type": "blog-post-category"
+                  },
+                  {
+                    "display_name": "Inställningar",
+                    "icon": "cogs",
+                    "item_type": "blog-settings"
+                  }
+                ]
+              },
+              {
+                "display_name": "Portfolio",
+                "icon": "book",
+                "items": [
+                  {
+                    "display_name": "Portfolioposter",
+                    "icon": "book",
+                    "item_type": "portfolio-post"
+                  }
+                ]
+              },
+              {
+                "display_name": "Produktkatalog",
+                "icon": "book",
+                "items": [
+                  {
+                    "display_name": "Produkter",
+                    "icon": "book",
+                    "item_type": "catalog-product"
+                  }
+                ]
+              }
+            ]
+          },
+          "meta": {
+            "item_type": {
+              "data": {
+                "type": "item-types",
+                "id": "c10-config"
+              }
+            },
+            "position": 0,
+            "status": "published"
+          }
+        }
+      }
+    ],
+    "bucket_meta": [
+      {
+        "data": {
+          "type": "meta",
+          "id": "config",
+          "attributes": {
+            "key": "config",
+            "value": {
+              "item_types": {
+                "hidden": [
+                  "nav-menu-item",
+                  "link"
+                ]
+              },
+              "admin_menu": [
+                {
+                  "display_name": "Sidor",
+                  "icon": "file",
+                  "item_type": "nav-menu-item"
+                },
+                {
+                  "display_name": "Blogg",
+                  "icon": "book",
+                  "items": [
+                    {
+                      "display_name": "Poster",
+                      "icon": "book",
+                      "item_type": "blog-post"
+                    },
+                    {
+                      "display_name": "Kategorier",
+                      "icon": "book",
+                      "item_type": "blog-post-category"
+                    },
+                    {
+                      "display_name": "Inställningar",
+                      "icon": "cogs",
+                      "item_type": "blog-settings"
+                    }
+                  ]
+                },
+                {
+                  "display_name": "Portfolio",
+                  "icon": "book",
+                  "items": [
+                    {
+                      "display_name": "Portfolioposter",
+                      "icon": "book",
+                      "item_type": "portfolio-post"
+                    }
+                  ]
+                },
+                {
+                  "display_name": "Produktkatalog",
+                  "icon": "book",
+                  "items": [
+                    {
+                      "display_name": "Produkter",
+                      "icon": "book",
+                      "item_type": "catalog-product"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "media": [
+      {
+        "id": "image-1",
+        "attributes": {
+          "title": "Slide 1",
+          "description": "En bild till slidern",
+          "file": {
+            "url": "/assets/img/item-1.png",
+            "name": "item-1.png",
+            "mime_type": "image/png",
+            "size": 0
+          }
+        }
+      },
+      {
+        "id": "image-2",
+        "attributes": {
+          "title": "Slide 2",
+          "description": "En bild till slidern",
+          "file": {
+            "url": "/assets/img/item-2.png",
+            "name": "item-2.png",
+            "mime_type": "image/png",
+            "size": 0
+          }
+        }
+      },
+      {
+        "id": "56ba75249cd1962f7b30f044",
+        "attributes": {
+          "title": "General 3",
+          "description": "",
+          "file": {
+            "url": "/assets/img/general-3.jpg",
+            "name": "general-3.jpg",
+            "mime_type": "image/jpeg",
+            "size": 0
+          }
+        }
+      }
+    ],
+    "access_tokens": [
+      {
+        "attributes": {
+          "name": "Min access token",
+          "description": "En access token till mig"
+        }
+      }
+    ]
+  }
+}
