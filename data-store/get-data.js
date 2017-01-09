@@ -6,7 +6,7 @@ module.exports = function setData(cb) {
   // console.log('This will only show once!');
   async.parallel({
     items: function(callback) {
-      twixly.items({}, function(err, items) {
+      twixly.items({sort: 'meta.position'}, function(err, items) {
         if (err) {
           callback(err);
         } else {
