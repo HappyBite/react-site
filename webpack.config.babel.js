@@ -30,7 +30,7 @@ export default {
   },
   output: {
     filename: `static/js/[name]${isProduction ? '.[chunkhash:8]' : ''}.js`,
-    path: path.resolve(__dirname, '.build'),
+    path: path.resolve(__dirname, 'build'),
     publicPath: '/'
   },
   module: {
@@ -82,7 +82,7 @@ export default {
   plugins: [
     new AssetsPlugin({
       filename: 'assets.json',
-      path: '.build/static',
+      path: 'build/static',
     }),
     new webpack.DefinePlugin({
       'process.env': {
