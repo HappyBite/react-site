@@ -1,4 +1,4 @@
 module.exports = {
-  BUCKET_ID: '5872f2d7ec3fda5503a50116',
-  ACCESS_TOKEN: '5872f2d8ec3fda5503a5011b' // Make sure this is a read only access token
+  BUCKET_ID: '58b2cbe60b3d4b6e2f97643d',
+  ACCESS_TOKEN: '58b2cbe80b3d4b6e2f976442' // Make sure this is a read only access token
 };

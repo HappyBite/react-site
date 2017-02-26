@@ -27,8 +27,8 @@ module.exports = function setData(cb) {
   function(err, results) { 
     if(err) return cb(err);
     
-    var items = results.items;
-    var media = results.media;
+    var items = results.items.data;
+    var media = results.media.data;
     var item_dictionary = {};
     var media_dictionary = {};
     var routes = {};
@@ -67,7 +67,7 @@ module.exports = function setData(cb) {
         var page = item_dictionary[item.relationships.page.data.id];
         page.attributes.slug = item.attributes.slug;
         page.attributes.path = item.attributes.path;
-        page.attributes.display_name = item.attributes.display_name;
+        page.attributes.display_name = item.attributes.title;
         page.attributes.start_page = item.attributes.start_page;
         page.meta.position = item.meta.position;
         routes['/' + page.attributes.slug] = {type: 'page', item_type: page.meta.item_type.data.id, path: page.attributes.path}; 
