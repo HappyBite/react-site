@@ -15,5 +15,36 @@ module.exports = {
     data.current_page = data.pages[url];
     data.url = url;
     return data;
+  },
+  
+  /**
+   * getMediaRelationship
+   * Description: Yields media object from relationship object
+   * @param {object} Relationship
+   * @return {object} Media object
+   */
+  getMediaRelationship: function(relationship) {
+    var data;
+    var mediaDictionary = cache.get('data').media_dictionary;
+    if (relationship && relationship.data && relationship.data.id) {
+      data = mediaDictionary[relationship.data.id];
+    }
+    return data;
+  },
+  
+  /**
+   * getItemRelationship
+   * Description: Yields item object from relationship object
+   * @param {object} relationship
+   * @return {object} Relationship object
+   */
+  getItemRelationship: function(relationship) {
+    var data;
+    var itemDictionary = cache.get('data').item_dictionary;
+    console.log(itemDictionary);
+    if (relationship && relationship.data && relationship.data.id) {
+      data = itemDictionary[relationship.data.id];
+    }
+    return data;
   }
 };
