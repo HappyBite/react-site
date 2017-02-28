@@ -2,31 +2,65 @@ import React from 'react';
 import helper from '../../data-store/helper.js';
 
 const Slider = ({ slider }) => (
-  <div id="carousel-example-generic" className="carousel slide" data-ride="carousel">
-    <ol className="carousel-indicators">
-      {slider.map((item, index) => (
-        <li data-target="#carousel-example-generic" data-slide-to={index} className={ index === 0 && 'active' } key={index}></li>
-      ))}
-    </ol>
-    <div className="carousel-inner" role="listbox">
-      {slider.map((item, index) => (
-        <div className={ index === 0 ? 'item active' : 'item' } key={index}>
-          <img src={helper.getMediaRelationship(item.image).attributes.file.url} alt="image" />
-          <div className="carousel-caption">
-            <h3>{item.heading}</h3>
-            <p className="lead" dangerouslySetInnerHTML={{ __html: item.text }} />
+  <div className="home-slider">
+    <div id="home-slider" className="carousel slide" data-ride="carousel">
+      <ol className="carousel-indicators">
+        {slider.map((slide, index) => (
+          <li data-target="#home-slider" data-slide-to={index} className={ index === 0 && 'active' } key={index}></li>
+        ))}
+      </ol>
+      <div className="carousel-inner">
+        {slider.map((slide, index) => (
+          <div className={ index === 0 ? 'item active' : 'item' } key={index} id={'item-' + index}>
+            <div className="container">
+              <div className="row">
+                <div className="col-sm-6"> 
+                  <div className="fully-responsive ext-center">
+                    <h3 className="fully-responsive__title animated slideInDown g-delay_1">{slide.heading}</h3>
+                    <div>
+                      { 
+                        slide.excerpt && (
+                          <div className="fully-responsive__text animated slideInDown g-delay_2">
+                            {slide.excerpt}
+                          </div>
+                        )
+                      }
+                      {
+                        slide.text && (
+                          <p className="animated fadeInUp g-delay_5">
+                            {slide.text}
+                          </p>
+                        )
+                      }
+                    </div>
+                    {
+                      slide.link && (
+                        <div className="fully-responsive__btns">
+                          <a className="btn btn-lg btn-red fully-responsive-btns__btn animated fadeInUpBig g-delay_5">{slide.link_text}</a>
+                        </div>
+                      )
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+            { 
+              slide.image && (
+                <div className="bg-img hidden-xs">
+                  <img src={helper.getMediaRelationship(slide.image).attributes.file.url} alt={slide.heading} />
+                </div>
+              )
+            }
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+      <a className="carousel-arrow carousel-arrow-prev" href="#home-slider" data-slide="prev">
+        <i className="fa fa-angle-left"></i>
+      </a>
+      <a className="carousel-arrow carousel-arrow-next" href="#home-slider" data-slide="next">
+        <i className="fa fa-angle-right"></i>
+      </a>
     </div>
-    <a className="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-      <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span className="sr-only">Previous</span>
-    </a>
-    <a className="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-      <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span className="sr-only">Next</span>
-    </a>
   </div>
 );
 

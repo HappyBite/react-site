@@ -9,39 +9,30 @@ const Navigation = ({data}) => {
                          'active' :
                          null;
     return (
-      <li className={activeCssClass} key={index}>
+      <li role="presentation" className={activeCssClass} key={index}>
         <Link to={key.toString()}>{page.attributes.display_name}</Link>
       </li>
     );
   });
   
   return (
-    <nav className="navbar navbar-inverse navbar-fixed-top">
-      <div className="container">
-        <div className="navbar-header">
-          <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span className="sr-only">Toggle navigation</span>
-            <span className="icon-bar"></span>
-            <span className="icon-bar"></span>
-            <span className="icon-bar"></span>
-          </button>
-          <Link className="navbar-brand" to="/">Project name</Link>
+    <ul className="nav navbar-nav navbar-right">
+      {navItems}
+      <li className="hidden-xs" id="navbar-search">
+        <a href="#" class="show" id="open-search">
+          <i className="fa fa-search"></i>
+        </a>
+        <a href="#" className="hidden" id="close-search">
+          <i className="fa fa-times"></i>
+        </a>
+        <div className="hidden" id="navbar-search-box">
+          <form className="form" role="form">
+            <input type="text" className="form-control" placeholder="Search" />
+            <button className="btn btn-red btn-sm" type="button"><i className="fa fa-search"></i></button>
+          </form>
         </div>
-        <div id="navbar" className="collapse navbar-collapse">
-          <ul className="nav navbar-nav">
-            {navItems}
-            {
-            // <li className="active"><Link to="/">Home</Link></li>
-            // <li><Link to="/sida-1">Sida 1</Link></li>
-            // <li><Link to="/sida-1/undersida-1">Sida 2</Link></li>
-            // <li><Link to="/blog">Blogg</Link></li>
-            // <li><Link to="/blog/category/html">Blogg Category</Link></li>
-            // <li><Link to="/contact">Contact</Link></li>
-            }
-          </ul>
-        </div>
-      </div>
-    </nav>
+      </li>
+    </ul>
   );
 };
 
