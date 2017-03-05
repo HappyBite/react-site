@@ -2,9 +2,7 @@ import React from 'react';
 
 const SubPage = ({ data, props }) => {
   return (
-    <div>
-      <h1>{data.current_page.attributes.display_name}</h1>
-    </div>
+    <h1 className="title-lg"><span>{ data.current_page.attributes.title }</span></h1>
   );
 };
 

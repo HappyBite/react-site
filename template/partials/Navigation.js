@@ -19,7 +19,7 @@ const Navigation = ({data}) => {
     <ul className="nav navbar-nav navbar-right">
       {navItems}
       <li className="hidden-xs" id="navbar-search">
-        <a href="#" class="show" id="open-search">
+        <a href="#" className="show" id="open-search">
           <i className="fa fa-search"></i>
         </a>
         <a href="#" className="hidden" id="close-search">

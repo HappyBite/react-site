@@ -8,8 +8,9 @@ export default ({ head, assets, markup }) => (
       {head.title.toComponent()}
       <link rel="shortcut icon" href="/assets/favicon.png" />
       <link rel="stylesheet" href="/assets/css/style.css" />
+      <link rel="stylesheet" href="/assets/css/default.css" />
       <link rel="stylesheet" href="/assets/css/animate.css" />
-      <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css" />
+      <link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css" />
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" />
     </head>
     <body>
